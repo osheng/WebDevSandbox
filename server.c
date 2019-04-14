@@ -10,8 +10,15 @@ https://www.i-programmer.info/programming/cc/9993-c-sockets-no-need-for-a-web-se
 #include <netinet/in.h>
 #include <netdb.h>
 #include <unistd.h>
+#include "helper.h"
 
 int main(int argc, char** argv) {
+
+  if (argc != 2) {
+    fprintf(stderr, "Usage: %s <file_name.html>\n", argv[0]);
+    exit(1);
+  }
+
  struct addrinfo hints, *server;
  memset(&hints, 0, sizeof hints);
  hints.ai_family =  AF_INET;
@@ -30,7 +37,9 @@ int main(int argc, char** argv) {
  char buffer[2048];
  //TODO write up some code to read in from an HTML file
  //TODO include some javascript in that HTML file
- char html[] = "<html><head><title>Temperature</title></head><body>{\"humidity\":81%,\"airtemperature\":23.5C}</p></body></html>\r\n";
+ FILE* fp = fopen_or_exit(argv[1], "r");
+ char *html = read_file(fp);
+ //char html[] = "<html><head><title>Temperature</title></head><body>{\"humidity\":81%,\"airtemperature\":23.5C}</p></body></html>\r\n";
  char data[2048] = {0};
  snprintf(data, sizeof(data),"%s %s", headers, html);
 
