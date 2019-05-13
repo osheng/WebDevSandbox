@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--  want to display a site where you get click a button to send an http request to get a picture-->
+<html>
+  <head>
+    <title>Animal Pictures</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      let img_src = "";
+      let img_alt = "no picture";
+      window.onload = function() {
+        document.getElementById("stock animal picture").src = "";
+        document.getElementById("stock animal picture").alt = img_alt;
+        document.getElementById("stock animal picture").width = "300";
+        document.getElementById("stock animal picture").height = "300";
+      };
+
+
+    function getNewPicture(){
+      if (img_src == "" || img_src == "moose"){
+        document.getElementById("stock animal picture").src = "https://t3.ftcdn.net/jpg/00/55/08/46/240_F_55084669_ZUMGNJrfjg9cTHfAh9aLWqZg6hmQhai7.jpg";
+        document.getElementById("stock animal picture").alt = "picture of a beaver";
+        img_src = "beaver";
+      }
+      else {
+        document.getElementById("stock animal picture").src  = "https://previews.123rf.com/images/natureguy/natureguy1704/natureguy170400234/77029961-alaska-yukon-bull-moose.jpg";
+        document.getElementById("stock animal picture").alt = "picture of a moose";
+        img_src = "moose";
+      }
+      console.log("Called getNewPicture");
+    };
+
+    </script>
+    <img id="stock animal picture">
+     <button onclick="getNewPicture()">Get New Picture</button>
+  </body>
+</html>
